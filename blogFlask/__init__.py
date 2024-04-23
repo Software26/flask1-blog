@@ -4,8 +4,14 @@ def create_app():
     
     app= Flask(__name__)
     
-    @app.route('/')
-    def hola():
-        return "Hola Mundo"
+    from blogFlask import home
+    app.register_blueprint(home.bp)
+    
+    
+    from blogFlask import auth
+    app.register_blueprint(auth.bp)
+    
+    from blogFlask import post
+    app.register_blueprint(post.bp)
     
     return app
