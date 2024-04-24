@@ -8,4 +8,4 @@ def index():
 
 @bp.route("/blog")
 def blog():
-    return "pagina de blog"
+    return render_template("blog.html")

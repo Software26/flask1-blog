@@ -1,17 +1,17 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
 
 bp= Blueprint('post', __name__, url_prefix = '/post')
 
 
 @bp.route('/posts')
 def posts():
-    return "pagina de posts"
+    return render_template("admin/posts.html")
 
 
 @bp.route('/create')
 def create():
-    return "pagina de create"
+    return render_template("admin/create.html")
 
 @bp.route('/update')
 def update():
-    return "pagina de update"
+    return render_template("admin/update.html")
