@@ -10,59 +10,71 @@
     <!-- Estilos de bootstrap y de app -->
     <link rel="stylesheet" href="{{url_for('static', filename= 'css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename= 'css/style.css')}}">
-    {% block style %}{% endblock style%}
+   
+    <!-- Seccion of head-->
+    {% block head %}
+    {% endblock head%}
+
 </head>
+
 <body>
-    <header class="p-3 text-bg-dark">
-        <div class="container">
-            <div class="d-flex align-items-center justify-content-between">
-                <a href="index.html" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                    <img src="{{ url_for('static', filename = 'img/bp-light.png') }}" alt="blog posts" width="40">
+
+
+{% block header%}
+    
+<header class="p-3 text-bg-dark">
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="index.html" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <img src="{{ url_for('static', filename = 'img/bp-light.png') }}" alt="blog posts" width="40">
+            </a>
+
+            <div class="text-end">
+                <a href="{{ url_for('auth.login') }}" class="btn btn-outline-light me-2">Iniciar sesión</a>
+                <a href="{{ url_for('auth.register') }}" class="btn btn-warning">Registrate</a>
+            
+                <a href="#" class="link-light text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
+                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
                 </a>
+                <ul class="dropdown-menu text-small">
 
-                <div class="text-end">
-                    <a href="{{ url_for('auth.login') }}" class="btn btn-outline-light me-2">Iniciar sesión</a>
-                    <a href="{{ url_for('auth.register') }}">Registrate</a>
-
-                    <a href="#" class="link-light text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
-                        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
-                    </a>
-                    <ul class="dropdown-menu text-small">
-
-                        <li>
-                        <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="admin/create.html">
-                                <span class="d-inline-block bg-success rounded-circle p-1"></span>
-                                Crear Blog
-                            </a>
-                        </li>
-                        </li>
-                        <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="admin/posts.html">
-                                <span class="d-inline-block bg-primary rounded-circle p-1"></span>
-                                Mis Blogs
-                            </a>
-                        </li>
-                        <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="auth/profile.html">
-                                <span class="d-inline-block bg-info rounded-circle p-1"></span>
-                                Perfil
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
-                                <span class="d-inline-block bg-danger rounded-circle p-1"></span>
-                                Cerrar sesión
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                    <li>
+                    <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="{{ url_for('post.create') }}">
+                            <span class="d-inline-block bg-success rounded-circle p-1"></span>
+                            Crear Blog
+                        </a>
+                    </li>
+                    </li>
+                    <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="{{ url_for('post.posts') }}">
+                            <span class="d-inline-block bg-primary rounded-circle p-1"></span>
+                            Mis Blogs
+                        </a>
+                    </li>
+                    <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="{{ url_for('auth.profile') }}">
+                            <span class="d-inline-block bg-info rounded-circle p-1"></span>
+                            Perfil
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                            <span class="d-inline-block bg-danger rounded-circle p-1"></span>
+                            Cerrar sesión
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </header>
+    </div>
+</header>
+
+{% endblock header%}
 
 
+
+<!-- Seccion of container-->
 {%block content%}
-
 {%endblock content%} 
 
 
