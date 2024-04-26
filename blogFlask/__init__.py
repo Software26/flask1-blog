@@ -22,5 +22,9 @@ def create_app():
     
     from blogFlask import post
     app.register_blueprint(post.bp)
-    
+     
+    from .models import User, Post
+     
+    with app.app_context():
+        db.create_all()
     return app
