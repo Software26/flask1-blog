@@ -10,7 +10,7 @@ class User(db.Model):
     photo = db.Column(db.String(200))
     
 ####### constructor ########################
-    def __init__(self, username, email, password,photo= None,id):
+    def __init__(self, username, email, password,photo= None):
         self.username = username
         self.email = email
         self.password = password
@@ -18,15 +18,26 @@ class User(db.Model):
         self.photo = photo
     
     def __repr__(self):
-        return f"<User '{self.username}>'"
+        return f"User: '{self.username}'"
     
 from datetime import datetime # creacion de tiempo de blog
 class Post(db.Model):
-    __table__ = 'posts'
+    __tablename__ = 'posts'
     id = db.Column(db.Integer, primary_key=True)
-    author = db.Column(db.String, db.models.ForeignKey("users.id"), nullable=False )  ##
+    author = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False )  ##
+    url = db.Column(db.String(100), unique = True, nullable=False)
     title= db.Column(db.String(100), nullable=False)
-    contenido = db.Column(db.Text, nullable=False)
-
+    info = db.Column(db.Text)
+    content = db.Column(db.Text, nullable=False)
+    created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    
+    ####constructor####
+    def __init__(self,author, url, title, info, content,) -> None:
+        self.author = author
+        self.url = url
+        self.title = title
+        self.info = info
+        self.content = content
+        
     def __repr__(self):
-        return f"Post('{self.titulo}')"
+        return f"Post: ('{self.title}') by {self.author})"
