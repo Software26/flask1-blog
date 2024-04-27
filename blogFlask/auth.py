@@ -17,13 +17,14 @@ def register():
         password = request.form.get("password")
         email = request.form.get("email")
         
-        user = User(username = username, email = email, password = generate_password_hash(password))
+        user = User(username, email, generate_password_hash(password))
         
         error = None
         
+        
         #comparando el nombre existente
         user_email = User.query.filter_by(email = email).first()
-        if user_email is error: 
+        if user_email == error: 
             db.session.add(user)
             db.session.commit()
             flash('Registro exitoso. Por favor, inicia sesión.', 'success')
@@ -31,7 +32,7 @@ def register():
         else:
             error = f'El correo electrónico {email} ya está registrado.'
         
-        flash(error, 'error')
+        flash(error,'error')
             
     return render_template("auth/register.html")
 #----------------------------------------------------------------
@@ -48,7 +49,7 @@ def login():
         user = User.query.filter_by(email = email).first()
         
         #Condicion de seguridad
-        if user is None or not check_password_hash(user.password, password): 
+        if user == None or not check_password_hash(user.password, password): 
             error = "Correo o la contrasena es incorrecto"
         
            #Log in
@@ -63,7 +64,7 @@ def login():
  
  
  # mantener un usuario logiodao
-bp.before_app_request
+@bp.before_app_request
 def load_logged_in_user():
     user_id = session.get('user_id')
      
@@ -93,6 +94,30 @@ def login_required(view):
     return wrapped_view
 #------------------------------------------------------------------------------
 
-@bp.route('/profile')
-def profile():
-    return render_template("auth/profile.html")
+#Editar perfil
+@bp.route('/profile/<int:id>', methods=("GET","POST"))
+@login_required
+def profile(id):
+    user= User.query.get_or_404(id)
+    
+    if request.method == "POST":
+        user.username = request.form.get("username")
+        password = request.form.get("password")
+        
+        error = None
+        if len(password) !=0:
+            user.password = generate_password_hash(password)
+        elif len(password) > 0 and len(password) < 6:
+            error = "Contraseña demasiado corta debe de tener mas 5 caracteres"
+    
+        if error is not None:
+            flash(error)
+        else:
+            db.session.commit()
+            flash("Perfil actualizado exitosamente.", "success")
+            return redirect(url_for('auth.profile', id=user.id))
+        
+        flash(error)
+    
+    
+    return render_template("auth/profile.html", user=user )
