@@ -1,40 +1,47 @@
-{% extends "base.html"%}
+{% extends "base.html"%} 
 
-{% block title%} Profile {% endblock title%}
 {% block content%}
 
     <div class="container">
+        <form method = "post">
         <div class="row mt-5">
             <div class="col-md-4">
                 <div class="text-center">
                     <img src="{{ url_for('static', filename='img/user-dark.png') }}" width="100" class="profile-image rounded-circle mb-2"
                         alt="Foto de perfil">
-                    <div class="mb-3">
-                        <input type="file" id="file" class="form-control" accept="image/*" hidden>
-                        <button class="btn btn-primary mb-2" onclick="document.getElementById('file').click()">Cambiar
-                            foto</button>
-                    </div>
+                    
+                        <div class="mb-3">
+                            
+                            <input type="file" id="photo" name='photo' class="form-control">
+                        
+                        </div>
+
                 </div>
+
             </div>
             <div class="col-md-8">
-                <h1>Perfil de Usuario</h1>
+                <h1>{% block title%}Perfil de Usuario{% endblock title%}</h1>
                 <hr class="mb-4">
-                <form>
+                
                     <div class="mb-3">
                         <label for="username" class="form-label">Nombre de usuario</label>
-                        <input type="text" class="form-control" id="username" readonly required>
+                        <input type="text" class="form-control" id="username" name ="username" value = "{{user.username}}" required>
                     </div>
+
                     <div class="mb-3">
                         <label for="email" class="form-label">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="email" required>
+                        <input type="email" class="form-control" id="email" name = "email" value= "{{user.email}}" required>
                     </div>
+
                     <div class="mb-3">
-                        <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="password" required>
+                        <label for="password" class="form-label"> Cambiar Contraseña</label>
+                        <input type="password" class="form-control" id="password" name = "password">
                     </div>
+
                     <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                </form>
+                
             </div>
         </div>
+    </form>
     </div>
  {% endblock content %}
