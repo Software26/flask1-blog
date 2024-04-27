@@ -6,7 +6,9 @@ from blogFlask import db # llamada de la base de datos
 
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
-###############################################################################################
+
+
+#----------------------------------------------------------------
 @bp.route('/register', methods = ("GET", "POST"))
 def register():
     
@@ -32,8 +34,8 @@ def register():
         flash(error, 'error')
             
     return render_template("auth/register.html")
-#############################################################################################################
-
+#----------------------------------------------------------------
+# login method
 @bp.route('/login', methods = ('GET', 'POST'))
 def login():
     
@@ -89,7 +91,7 @@ def login_required(view):
             return redirect(url_for('auth.login'))
         return view(**kwargs)
     return wrapped_view
-
+#------------------------------------------------------------------------------
 
 @bp.route('/profile')
 def profile():

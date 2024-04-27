@@ -14,7 +14,6 @@ class User(db.Model):
         self.username = username
         self.email = email
         self.password = password
-        self.set_password(password)
         self.photo = photo
     
     def __repr__(self):
