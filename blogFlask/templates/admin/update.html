@@ -8,25 +8,26 @@
                 <h1 class="h3">{% block title %}Editar Blog{% endblock title%}</h1>
             </div>
             <div class="body">
-                <form>
+                <form method = "POST">
+
+                    
                     <div class="mb-3">
-                        <label for="url" class="form-label">URL de Blog</label>
-                        <input type="text" class="form-control" id="url" placeholder="ejemplo-title">
+                        <label for="title" class="form-label">Título</label>
+                        <input type="text" class="form-control" id="title" name="title" required value="{{ post.title }}" placeholder="Título del blog">
                     </div>
+
                     <div class="mb-3">
-                        <label for="titleInput" class="form-label">Título</label>
-                        <input type="text" class="form-control" id="titleInput" placeholder="Título del blog">
+                        <label for="info" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="info" name = "info" required rows="3"
+                            placeholder="Breve descripción del blog">{{ post.info}}</textarea>
                     </div>
+
                     <div class="mb-3">
-                        <label for="descInput" class="form-label">Descripción</label>
-                        <textarea class="form-control" id="descInput" rows="3"
-                            placeholder="Breve descripción del blog"></textarea>
+                        <label for="content" class="form-label">Contenido</label>
+                        {{ ckeditor.create(value=post.content) }}
+
                     </div>
-                    <div class="mb-3">
-                        <label for="contentInput" class="form-label">Contenido</label>
-                        <textarea class="form-control" id="contentInput" rows="6"
-                            placeholder="Contenido del blog"></textarea>
-                    </div>
+
                     <button type="submit" class="btn btn-primary">Actualizar</button>
                 </form>
             </div>
