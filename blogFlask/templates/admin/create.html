@@ -11,23 +11,23 @@
                 <form>
                     <div class="mb-3">
                         <label for="url" class="form-label">URL</label>
-                        <input type="text" class="form-control" id="url" placeholder="ejemplo-title">
+                        <input type="text" class="form-control" id="url" name="url" required placeholder="ejemplo-title">
                     </div>
                     <div class="mb-3">
-                        <label for="titleInput" class="form-label">Título</label>
-                        <input type="text" class="form-control" id="titleInput" placeholder="Título del blog">
+                        <label for="title" class="form-label">Título</label>
+                        <input type="text" class="form-control" id="title" name= "title"required placeholder="Título del blog">
                     </div>
                     <div class="mb-3">
-                        <label for="descInput" class="form-label">Descripción</label>
-                        <textarea class="form-control" id="descInput" rows="3"
+                        <label for="desc" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="desc" name = "desc" required rows="3"
                             placeholder="Breve descripción del blog"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="contentInput" class="form-label">Contenido</label>
-                        <textarea class="form-control" id="contentInput" rows="6"
-                            placeholder="Contenido del blog"></textarea>
+                        <label for="content" class="form-label">Contenido</label><br>
+                        {{ ckeditor.create() }}
+                        
                     </div>
-                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>
             </div>
         </div>
