@@ -1,6 +1,9 @@
 from flask import Flask,render_template
 from flask_sqlalchemy import SQLAlchemy 
 
+
+
+
 # esto es para crear la instacia para cre
 db = SQLAlchemy()
 
@@ -12,7 +15,11 @@ def create_app():
     
      #inicializar la base de datos
     db.init_app(app) 
-     
+    
+    from flask_ckeditor import CKEditor
+    ckeditor = CKEditor(app)
+    
+    
     from blogFlask import home
     app.register_blueprint(home.bp)
     
