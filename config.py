@@ -8,4 +8,4 @@ class Config:
     
     SQLALCHEMY_DATABASE_URI = POSTGREESQL
     
-    CKEDITOR_PKG_TYPE = 'basic'
+    CKEDITOR_PKG_TYPE = 'standard-all'
