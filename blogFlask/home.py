@@ -9,6 +9,7 @@ def get_user(id):
     user = User.query.get_or_404(id)
     return user
 
+
 @bp.route('/')
 def index():
     posts = Post.query.all()
@@ -17,4 +18,4 @@ def index():
 @bp.route("/blog/<url>")
 def blog(url):
     post = Post.query.filter_by(url=url).first()
-    return render_template("blog.html", post = post) #send template post
+    return render_template("blog.html", post = post, get_user = get_user) #send template post
