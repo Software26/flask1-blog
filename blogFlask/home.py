@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect
 from .models import User,Post
 
 
@@ -9,10 +9,19 @@ def get_user(id):
     user = User.query.get_or_404(id)
     return user
 
+#Buscador 
+def search_posts(query):
+    posts = Post.query.filter(Post.title.ilike(f'%{query}%')).all()
+    return posts
 
-@bp.route('/')
+@bp.route('/', methods=['GET','POST'])
 def index():
-    posts = Post.query.all()
+    posts = Post.query.all()#Mostrar datos y mostralos
+    if request.method == 'POST':
+        query = request.form.get('search')
+        posts = search_posts(query)
+        value = "hidden"
+        return render_template("index.html", posts = posts, get_user = get_user, value=value)
     return render_template("index.html", posts = posts, get_user = get_user)
 
 @bp.route("/blog/<url>")
